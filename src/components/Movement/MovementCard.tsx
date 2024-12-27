@@ -1,5 +1,6 @@
 import { MovementTechnique } from './types';
 
+// hardcoding colors lmao!!!
 export function MovementCard({ name, description, difficulty, usage, category }: MovementTechnique & { category: string }) {
   const colorSchemes = {
     common: {

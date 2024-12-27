@@ -5,7 +5,8 @@ import { useState } from 'react';
 export function ResourceCard({ resource }: { resource: Resource }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Extract video ID from YouTube URL
+  // regex stolen from stackoverflow, dont touch it
+  // idk why but safari needs this gpu shit or it breaks
   const getVideoId = (url: string) => {
     const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
@@ -13,7 +14,8 @@ export function ResourceCard({ resource }: { resource: Resource }) {
   };
 
   const videoId = resource.type === 'video' ? getVideoId(resource.url) : null;
-
+  
+// idk why but safari needs this gpu shit or it breaks
   return (
     <a 
       href={resource.url}
@@ -38,21 +40,26 @@ export function ResourceCard({ resource }: { resource: Resource }) {
       {resource.type === 'video' && videoId && (
         <div className={`
           absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+1rem)]
-          w-[300px] h-[169px] rounded-lg overflow-hidden
+          w-[320px] h-[180px] rounded-lg overflow-hidden
           opacity-0 scale-95
           group-hover:opacity-100 group-hover:scale-100
-          transition-all duration-500 ease-out
+          transition-all duration-300 ease-out
           transform-gpu
           pointer-events-none
           z-50
-          backdrop-blur-sm
+          shadow-xl
         `}>
           <img 
-            src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
+            src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+            onError={(e) => {
+              // fallback to hqdefault if maxresdefault doesn't exist
+              (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            }}
             alt={resource.title}
             className="w-full h-full object-cover transform-gpu"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-black/10" />
         </div>
       )}
     </a>

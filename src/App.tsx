@@ -9,6 +9,7 @@ import { Movement } from './pages/Movement';
 import './styles/animations.css';
 import './styles/theme.css';
 
+// ffs had to add this to fix the gpu shit
 function App() {
   const [activeTab, setActiveTab] = useState('home');
 

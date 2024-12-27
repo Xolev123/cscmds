@@ -1,6 +1,7 @@
 import { NewsItem } from './NewsItem';
 import { NEWS_ITEMS } from './NewsData';
 
+// i love straight jlorkin gradient masks to hide janky transitions
 export function NewsTicker() {
   return (
     <div className="relative w-full overflow-hidden bg-opacity-20 bg-blue-900 backdrop-blur-md border-b border-blue-500/30">

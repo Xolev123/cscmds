@@ -1,5 +1,6 @@
 import { AutoExecCommand } from './types';
 
+// btw need to make this more responsive on mobile
 export function AutoExecCard({ command, description, reason, category }: AutoExecCommand) {
   const categoryColors = {
     Network: 'border-blue-500/20 hover:border-blue-500/40',

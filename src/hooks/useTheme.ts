@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 
+// localstorage check cause next.js niggas about h2o 😝
+
+// dark mode implementation is stupid asf but it works !
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
