@@ -39,20 +39,20 @@ export function ResourceCard({ resource }: { resource: Resource }) {
         <div className={`
           absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+1rem)]
           w-[300px] h-[169px] rounded-lg overflow-hidden
-          opacity-0 invisible
-          group-hover:opacity-100 group-hover:visible
-          transition-all duration-300 transform
-          group-hover:translate-y-0 translate-y-4
-          shadow-2xl
+          opacity-0 scale-95
+          group-hover:opacity-100 group-hover:scale-100
+          transition-all duration-500 ease-out
+          transform-gpu
           pointer-events-none
           z-50
+          backdrop-blur-sm
         `}>
           <img 
             src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
             alt={resource.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transform-gpu"
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
         </div>
       )}
     </a>
