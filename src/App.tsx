@@ -40,7 +40,7 @@ function App() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="fixed inset-0 bg-noise opacity-[0.015] pointer-events-none" />
       <NewsTicker />
-      <main className="max-w-screen-xl mx-auto px-4 pb-24 pt-20">
+      <main className="max-w-screen-xl mx-auto px-4 pb-40">
         {renderContent()}
       </main>
       <Navigation 

@@ -28,8 +28,8 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
 }) {
   return (
     <>
-      {/* Main Navigation (Top) */}
-      <nav className="fixed top-0 left-0 right-0 bg-white/10 backdrop-blur-md border-b border-white/10">
+      {/* Main Navigation (Above Bottom Nav) */}
+      <nav className="fixed bottom-16 left-0 right-0 bg-white/10 backdrop-blur-md border-y border-white/10">
         <div className="max-w-screen-xl mx-auto px-4">
           <div className="flex justify-around">
             {mainTabs.map((tab) => {
@@ -41,7 +41,7 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
                     setActiveMain(tab.id);
                     setActiveTab(subTabs[tab.id as keyof typeof subTabs][0].id);
                   }}
-                  className={`flex items-center gap-2 py-4 px-6 transition-colors duration-200 ${
+                  className={`flex items-center gap-2 py-3 px-6 transition-colors duration-200 ${
                     activeMain === tab.id
                       ? 'text-blue-400 border-b-2 border-blue-400'
                       : 'text-gray-400 hover:text-blue-400'
