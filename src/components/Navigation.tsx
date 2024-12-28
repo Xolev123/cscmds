@@ -32,9 +32,12 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
   return (
     <>
       {/* Main Navigation (Toggle with click) */}
-      <div className={`fixed bottom-[72px] left-0 right-0 transition-all duration-200 ${
-        isMainNavVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      }`}>
+      <div className={`fixed bottom-[72px] left-0 right-0 transition-all duration-300 ease-in-out transform
+        ${isMainNavVisible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+      >
         <div className="max-w-screen-xl mx-auto">
           <div className="flex justify-center gap-4 px-4">
             {mainTabs.map((tab) => {
@@ -47,7 +50,7 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
                     setActiveTab(subTabs[tab.id as keyof typeof subTabs][0].id);
                     setIsMainNavVisible(false);
                   }}
-                  className={`flex items-center gap-2 py-3 px-6 rounded-md transition-colors duration-200 
+                  className={`flex items-center gap-2 py-3 px-6 rounded-md transition-all duration-200 
                     ${activeMain === tab.id
                       ? 'text-blue-400 bg-white/5'
                       : 'text-gray-400 hover:text-blue-400 hover:bg-white/5'
@@ -64,19 +67,25 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
 
       {/* Sub Navigation (Bottom) */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/5 backdrop-blur-md border-t border-white/10">
-        {/* Click Indicator */}
-        <button 
-          onClick={() => setIsMainNavVisible(!isMainNavVisible)}
-          className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-8 flex items-center justify-center 
-            bg-white/5 hover:bg-white/10 rounded-t-md border-t border-l border-r border-white/10 
-            transition-colors duration-200"
-        >
-          {isMainNavVisible ? (
-            <ChevronDown className="w-5 h-5 text-blue-400" />
-          ) : (
-            <ChevronUp className="w-5 h-5 text-gray-400" />
-          )}
-        </button>
+        {/* Toggle Button */}
+        <div className="absolute left-1/2 -translate-x-1/2 -top-7 flex items-center justify-center">
+          <button 
+            onClick={() => setIsMainNavVisible(!isMainNavVisible)}
+            className="group bg-background hover:bg-white/5 w-12 h-7 rounded-t-lg 
+              border-t border-l border-r border-white/10 transition-all duration-200 
+              hover:w-16"
+          >
+            <div className={`transform transition-all duration-300 ease-in-out ${
+              isMainNavVisible ? 'rotate-180 translate-y-1' : '-translate-y-1'
+            }`}>
+              <ChevronUp 
+                className={`w-5 h-5 mx-auto transition-colors duration-200 ${
+                  isMainNavVisible ? 'text-blue-400' : 'text-gray-400 group-hover:text-blue-400'
+                }`} 
+              />
+            </div>
+          </button>
+        </div>
 
         <div className="max-w-screen-xl mx-auto">
           <div className="flex justify-around">
