@@ -5,9 +5,7 @@ import { Home } from './pages/Home';
 import { LaunchOptions } from './pages/LaunchOptions';
 import { AutoexecCfg } from './pages/AutoexecCfg';
 import { Movement } from './pages/Movement';
-import { MovementLab } from './pages/MovementLab';
-import { SettingsLab } from './pages/SettingsLab';
-import { Tools } from './pages/Tools';
+import { MovementLab, Tools, SettingsLab } from './components/Lab';
 
 import './styles/animations.css';
 import './styles/theme.css';
