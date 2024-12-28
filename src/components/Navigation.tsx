@@ -29,9 +29,9 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
   return (
     <>
       {/* Main Navigation (Above Bottom Nav) */}
-      <nav className="fixed bottom-16 left-0 right-0 bg-white/10 backdrop-blur-md border-y border-white/10">
-        <div className="max-w-screen-xl mx-auto px-4">
-          <div className="flex justify-around">
+      <nav className="fixed bottom-[72px] left-0 right-0 bg-background border-t border-white/10">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="flex justify-end gap-4 px-6">
             {mainTabs.map((tab) => {
               const Icon = tab.icon;
               return (
@@ -41,14 +41,14 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
                     setActiveMain(tab.id);
                     setActiveTab(subTabs[tab.id as keyof typeof subTabs][0].id);
                   }}
-                  className={`flex items-center gap-2 py-3 px-6 transition-colors duration-200 ${
+                  className={`flex items-center gap-2 py-2 px-4 transition-colors duration-200 ${
                     activeMain === tab.id
-                      ? 'text-blue-400 border-b-2 border-blue-400'
+                      ? 'text-blue-400'
                       : 'text-gray-400 hover:text-blue-400'
                   }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  <span>{tab.label}</span>
+                  <Icon className="w-4 h-4" />
+                  <span className="text-sm">{tab.label}</span>
                 </button>
               );
             })}
@@ -57,8 +57,8 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
       </nav>
 
       {/* Sub Navigation (Bottom) */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md border-t border-white/10">
-        <div className="max-w-screen-xl mx-auto px-4">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/5 backdrop-blur-md border-t border-white/10">
+        <div className="max-w-screen-xl mx-auto">
           <div className="flex justify-around">
             {subTabs[activeMain as keyof typeof subTabs].map((tab) => {
               const Icon = tab.icon;
