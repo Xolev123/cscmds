@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { Home, Settings, Code, Move, Microscope, Tool } from 'lucide-react';
+import { Home, Settings, Code, Move, Flask } from 'lucide-react';
 
+// main nav tabs at the top
 const mainTabs = [
   { id: 'home', label: 'Home', icon: Home },
-  { id: 'lab', label: 'Lab', icon: Microscope },
+  { id: 'lab', label: 'Lab', icon: Flask },
 ];
 
+// sub tabs that show up in the bottom nav
 const subTabs = {
   home: [
     { id: 'launch-options', label: 'Launch Options', icon: Settings },
@@ -13,39 +14,72 @@ const subTabs = {
     { id: 'movement', label: 'Movement', icon: Move },
   ],
   lab: [
-    { id: 'lab-movement', label: 'Movement Lab', icon: Move },
-    { id: 'lab-settings', label: 'Settings Lab', icon: Settings },
-    { id: 'lab-tools', label: 'Tools', icon: Tool },
+    { id: 'movement-lab', label: 'Movement', icon: Move },
+    { id: 'settings-lab', label: 'Settings', icon: Settings },
+    { id: 'tools', label: 'Tools', icon: Code },
   ]
 };
 
-export function Navigation({ activeTab, setActiveTab }: {
+export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab }: {
+  activeMain: string;
   activeTab: string;
+  setActiveMain: (tab: string) => void;
   setActiveTab: (tab: string) => void;
 }) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg">
-      <div className="max-w-screen-xl mx-auto px-4">
-        <div className="flex justify-around">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-col items-center py-4 px-6 transition-colors duration-200 ${
-                  activeTab === tab.id
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
-                }`}
-              >
-                <Icon className="w-6 h-6" />
-                <span className="mt-1 text-sm">{tab.label}</span>
-              </button>
-            );
-          })}
+    <>
+      {/* Main Navigation (Top) */}
+      <nav className="fixed top-0 left-0 right-0 bg-white/10 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-screen-xl mx-auto px-4">
+          <div className="flex justify-around">
+            {mainTabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveMain(tab.id);
+                    setActiveTab(subTabs[tab.id as keyof typeof subTabs][0].id);
+                  }}
+                  className={`flex items-center gap-2 py-4 px-6 transition-colors duration-200 ${
+                    activeMain === tab.id
+                      ? 'text-blue-400 border-b-2 border-blue-400'
+                      : 'text-gray-400 hover:text-blue-400'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Sub Navigation (Bottom) */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md border-t border-white/10">
+        <div className="max-w-screen-xl mx-auto px-4">
+          <div className="flex justify-around">
+            {subTabs[activeMain as keyof typeof subTabs].map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex flex-col items-center py-4 px-6 transition-colors duration-200 ${
+                    activeTab === tab.id
+                      ? 'text-blue-400'
+                      : 'text-gray-400 hover:text-blue-400'
+                  }`}
+                >
+                  <Icon className="w-6 h-6" />
+                  <span className="mt-1 text-sm">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+    </>
   );
 }

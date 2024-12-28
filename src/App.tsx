@@ -5,13 +5,17 @@ import { Home } from './pages/Home';
 import { LaunchOptions } from './pages/LaunchOptions';
 import { AutoexecCfg } from './pages/AutoexecCfg';
 import { Movement } from './pages/Movement';
+import { MovementLab } from './pages/MovementLab';
+import { SettingsLab } from './pages/SettingsLab';
+import { Tools } from './pages/Tools';
 
 import './styles/animations.css';
 import './styles/theme.css';
 
 // ffs had to add this to fix the gpu shit
 function App() {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeMain, setActiveMain] = useState('home');
+  const [activeTab, setActiveTab] = useState('launch-options');
 
   const renderContent = () => {
     switch (activeTab) {
@@ -23,6 +27,12 @@ function App() {
         return <AutoexecCfg />;
       case 'movement':
         return <Movement />;
+      case 'movement-lab':
+        return <MovementLab />;
+      case 'settings-lab':
+        return <SettingsLab />;
+      case 'tools':
+        return <Tools />;
       default:
         return <Home />;
     }
@@ -32,10 +42,15 @@ function App() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="fixed inset-0 bg-noise opacity-[0.015] pointer-events-none" />
       <NewsTicker />
-      <main className="max-w-screen-xl mx-auto px-4 pb-24 pt-8">
+      <main className="max-w-screen-xl mx-auto px-4 pb-24 pt-20">
         {renderContent()}
       </main>
-      <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navigation 
+        activeMain={activeMain}
+        activeTab={activeTab}
+        setActiveMain={setActiveMain}
+        setActiveTab={setActiveTab}
+      />
     </div>
   );
 }
