@@ -1,12 +1,23 @@
 import { useState } from 'react';
-import { Home, Settings, Code, Move } from 'lucide-react';
+import { Home, Settings, Code, Move, Microscope, Tool } from 'lucide-react';
 
-const tabs = [
+const mainTabs = [
   { id: 'home', label: 'Home', icon: Home },
-  { id: 'launch-options', label: 'Launch Options', icon: Settings },
-  { id: 'autoexec', label: 'Autoexec CFG', icon: Code },
-  { id: 'movement', label: 'Movement', icon: Move },
+  { id: 'lab', label: 'Lab', icon: Microscope },
 ];
+
+const subTabs = {
+  home: [
+    { id: 'launch-options', label: 'Launch Options', icon: Settings },
+    { id: 'autoexec', label: 'Autoexec CFG', icon: Code },
+    { id: 'movement', label: 'Movement', icon: Move },
+  ],
+  lab: [
+    { id: 'lab-movement', label: 'Movement Lab', icon: Move },
+    { id: 'lab-settings', label: 'Settings Lab', icon: Settings },
+    { id: 'lab-tools', label: 'Tools', icon: Tool },
+  ]
+};
 
 export function Navigation({ activeTab, setActiveTab }: {
   activeTab: string;
