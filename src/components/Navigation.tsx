@@ -1,4 +1,5 @@
-import { Home, Settings, Code, Move, Beaker, ChevronUp } from 'lucide-react';
+import { Home, Settings, Code, Move, Beaker, ChevronUp, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 
 // main nav tabs at the top
 const mainTabs = [
@@ -26,12 +27,16 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
   setActiveMain: (tab: string) => void;
   setActiveTab: (tab: string) => void;
 }) {
+  const [isMainNavVisible, setIsMainNavVisible] = useState(false);
+
   return (
     <>
-      {/* Main Navigation (Appears on hover) */}
-      <div className="fixed bottom-[72px] left-0 right-0 pointer-events-none">
+      {/* Main Navigation (Toggle with click) */}
+      <div className={`fixed bottom-[72px] left-0 right-0 transition-all duration-200 ${
+        isMainNavVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}>
         <div className="max-w-screen-xl mx-auto">
-          <div className="flex justify-center gap-4 opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200">
+          <div className="flex justify-center gap-4 px-4">
             {mainTabs.map((tab) => {
               const Icon = tab.icon;
               return (
@@ -40,15 +45,16 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
                   onClick={() => {
                     setActiveMain(tab.id);
                     setActiveTab(subTabs[tab.id as keyof typeof subTabs][0].id);
+                    setIsMainNavVisible(false);
                   }}
-                  className={`pointer-events-auto flex items-center gap-2 py-2 px-4 rounded-md transition-colors duration-200 
+                  className={`flex items-center gap-2 py-3 px-6 rounded-md transition-colors duration-200 
                     ${activeMain === tab.id
                       ? 'text-blue-400 bg-white/5'
                       : 'text-gray-400 hover:text-blue-400 hover:bg-white/5'
                     }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  <span className="text-sm">{tab.label}</span>
+                  <Icon className="w-5 h-5" />
+                  <span>{tab.label}</span>
                 </button>
               );
             })}
@@ -57,12 +63,20 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
       </div>
 
       {/* Sub Navigation (Bottom) */}
-      <nav className="group/nav fixed bottom-0 left-0 right-0 bg-white/5 backdrop-blur-md border-t border-white/10">
-        {/* Hover Indicator */}
-        <div className="absolute -top-6 left-0 right-0 h-6 flex items-center justify-center">
-          <div className="w-12 h-[2px] bg-white/10 group-hover/nav:bg-blue-400/50 transition-colors duration-200" />
-          <ChevronUp className="absolute top-1 w-4 h-4 text-white/20 group-hover/nav:text-blue-400/50 transition-colors duration-200" />
-        </div>
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/5 backdrop-blur-md border-t border-white/10">
+        {/* Click Indicator */}
+        <button 
+          onClick={() => setIsMainNavVisible(!isMainNavVisible)}
+          className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-8 flex items-center justify-center 
+            bg-white/5 hover:bg-white/10 rounded-t-md border-t border-l border-r border-white/10 
+            transition-colors duration-200"
+        >
+          {isMainNavVisible ? (
+            <ChevronDown className="w-5 h-5 text-blue-400" />
+          ) : (
+            <ChevronUp className="w-5 h-5 text-gray-400" />
+          )}
+        </button>
 
         <div className="max-w-screen-xl mx-auto">
           <div className="flex justify-around">
