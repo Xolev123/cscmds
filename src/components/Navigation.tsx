@@ -1,9 +1,9 @@
-import { Home, Settings, Code, Move, Flask } from 'lucide-react';
+import { Home, Settings, Code, Move, Beaker } from 'lucide-react';
 
 // main nav tabs at the top
 const mainTabs = [
   { id: 'home', label: 'Home', icon: Home },
-  { id: 'lab', label: 'Lab', icon: Flask },
+  { id: 'lab', label: 'Lab', icon: Beaker },
 ];
 
 // sub tabs that show up in the bottom nav
