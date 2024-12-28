@@ -1,4 +1,4 @@
-import { Home, Settings, Code, Move, Beaker } from 'lucide-react';
+import { Home, Settings, Code, Move, Beaker, ChevronUp } from 'lucide-react';
 
 // main nav tabs at the top
 const mainTabs = [
@@ -58,6 +58,12 @@ export function Navigation({ activeMain, activeTab, setActiveMain, setActiveTab 
 
       {/* Sub Navigation (Bottom) */}
       <nav className="group/nav fixed bottom-0 left-0 right-0 bg-white/5 backdrop-blur-md border-t border-white/10">
+        {/* Hover Indicator */}
+        <div className="absolute -top-6 left-0 right-0 h-6 flex items-center justify-center">
+          <div className="w-12 h-[2px] bg-white/10 group-hover/nav:bg-blue-400/50 transition-colors duration-200" />
+          <ChevronUp className="absolute top-1 w-4 h-4 text-white/20 group-hover/nav:text-blue-400/50 transition-colors duration-200" />
+        </div>
+
         <div className="max-w-screen-xl mx-auto">
           <div className="flex justify-around">
             {subTabs[activeMain as keyof typeof subTabs].map((tab) => {
